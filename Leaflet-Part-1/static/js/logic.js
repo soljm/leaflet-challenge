@@ -34,7 +34,10 @@ function createMap(earthquakes) {
     legend.onAdd = function (map) {
 
         let div = L.DomUtil.create('div', 'info legend');
-        let grades = [-10, 10, 30, 50, 70, 90];
+        
+        div.innerHTML += "<h4>Depth</h4>"; // Adds title to legend
+
+        let grades = [-10, 10, 30, 50, 70, 90]; // Separates the depth levels
 
         // Loop through intervals and generate a label with a colored square for each interval
         for (var i = 0; i < grades.length; i++) {
