@@ -42,7 +42,7 @@ function createMap(earthquakes) {
         // Loop through intervals and generate a label with a colored square for each interval
         for (var i = 0; i < grades.length; i++) {
             div.innerHTML +=
-                '<i style="background-color:' + getColor(grades[i] + 1) + '"></i> ' +
+                '<i style="background-color:' + getColour(grades[i] + 1) + '"></i> ' +
                 grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
         }
         return div;
@@ -61,7 +61,7 @@ function createMarkers(response) {
                 radius: geoJsonPoint.properties.mag * 5,
                 color: 'rgb(0,0,0)',
                 weight: 1,
-                fillColor: getColor(geoJsonPoint.geometry.coordinates[2]),
+                fillColor: getColour(geoJsonPoint.geometry.coordinates[2]),
                 fillOpacity: 1.0
             });
         }
@@ -72,7 +72,7 @@ function createMarkers(response) {
 }
 
 // Create function to change colour of marker based on depth
-function getColor(d) {
+function getColour(d) {
     return d > 90 ? 'rgb(96,78,138)' :
         d > 70 ? 'rgb(135,93,142)' :
             d > 50 ? 'rgb(187,122,142' :
