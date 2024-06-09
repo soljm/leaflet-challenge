@@ -28,6 +28,7 @@ function createMap(earthquakes) {
         collapsed: false
     }).addTo(map);
 
+    // Create legend
     let legend = L.control({position: 'bottomright'});
 
     legend.onAdd = function (map) {
@@ -35,13 +36,12 @@ function createMap(earthquakes) {
         let div = L.DomUtil.create('div', 'info legend');
         let grades = [-10, 10, 30, 50, 70, 90];
 
-        // loop through our density intervals and generate a label with a colored square for each interval
+        // Loop through intervals and generate a label with a colored square for each interval
         for (var i = 0; i < grades.length; i++) {
             div.innerHTML +=
                 '<i style="background-color:' + getColor(grades[i] + 1) + '"></i> ' +
                 grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
         }
-
         return div;
     };
     legend.addTo(map);
@@ -52,6 +52,8 @@ function createMarkers(response) {
 
     let layer = L.geoJSON(response, {
         pointToLayer: function (geoJsonPoint, latlng) {
+
+            // Create circle marker for each point with fill colour based on depth and bind popup showing place, magnitude, and depth
             return L.circleMarker(latlng, {
                 radius: geoJsonPoint.properties.mag * 5,
                 color: 'rgb(0,0,0)',
